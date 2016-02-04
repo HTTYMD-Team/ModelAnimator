@@ -1,0 +1,32 @@
+
+
+
+apply plugin: 'java'
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+apply plugin: "java"
+
+sourceSets {
+	main {
+		java { srcDir 'MyTechne/src' }
+		resources { srcDir 'MyTechne/resources' include('**') }
+	}
+}
+
+dependencies {
+	compile files('Externals/LWJGL/lwjgl.jar', 'Externals/LWJGL/lwjgl_util.jar', 'Externals/LWJGL/slick-util.jar')
+	compile fileTree(dir: 'Externals', include: ['*.jar'])
+}
+
+jar {
+	//Place jar into distribution folder
+	destinationDir = file 'releases'
+	//Keep the jar as clean as possible
+	includeEmptyDirs = false
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+artifacts {
+	archives jar
+}
